@@ -14,7 +14,7 @@ export class RecipeService {
         new Ingredient('Meat', 1),
         new Ingredient('French fries', 20)
       ]),
-    new Recipe('Big fat burger', 'What else you need to say?', 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Handi-chicken-recipe.jpg',
+    new Recipe('Big fat burger', 'What else you need to say?', 'https://sifu.unileversolutions.com/image/en-AU/recipe-topvisual/2/1260-709/beef-burger-with-deep-fried-bacon-and-thousand-island-dressing-50247463.jpg',
       [
         new Ingredient('Buns', 2),
         new Ingredient('Meat', 2)
