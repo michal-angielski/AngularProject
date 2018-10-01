@@ -3,6 +3,9 @@ import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import {Store} from '@ngrx/store';
+import * as fromRecipe from '../store/recipe.reducers';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-list',
@@ -10,21 +13,23 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
-  recipes: Recipe[];
+  recipeState: Observable<fromRecipe.State>;
   subscription: Subscription;
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private store: Store<fromRecipe.FeatureState>) { }
 
   ngOnInit() {
-    this.subscription = this.recipeService.recipesChanged
-      .subscribe(
-        (recipes: Recipe[]) => {
-          this.recipes = recipes;
-        }
-      );
-    this.recipes = this.recipeService.getRecipes();
+    this.recipeState = this.store.select('recipes');
+    // this.subscription = this.recipeService.recipesChanged
+    //   .subscribe(
+    //     (recipes: Recipe[]) => {
+    //       this.recipes = recipes;
+    //     }
+    //   );
+    // this.recipes = this.recipeService.getRecipes();
   }
 
   onNewRecipe() {
